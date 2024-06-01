@@ -27,7 +27,7 @@ This is a skeleton Java Spring boot multi-module application.
 3. Run `docker compose up -d`
 4. Login into [sonarqube](http://localhost:9000) using default creds admin/admin.
 5. Create a new project on sonarqube and generate a token.
-6. Update the token in sonar-project.properties file in sonar.login property.
+6. Replace the project key and token in pom.xml file.
 4. Run `mvn clean install`
 
 To access generated sonar report go to http://localhost:9000
