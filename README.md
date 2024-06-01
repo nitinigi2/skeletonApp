@@ -28,3 +28,4 @@ This is a skeleton Java Spring boot multi-module application.
 4. Run `mvn clean install`
 
 To access generated sonar report go to http://localhost:9000
+Login into sonarqube using admin/admin default credentials
