@@ -31,6 +31,7 @@
         <sonar.login>admin</sonar.login>
         <sonar.password>admin1</sonar.password>
         <sonar.language>java</sonar.language>
+        <sonar.exclusions>**/*.xml</sonar.exclusions>
         <sonar.coverage.jacoco.xmlReportPaths>../aggregate-report/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
     </properties>
 
