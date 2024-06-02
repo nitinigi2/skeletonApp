@@ -26,16 +26,7 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <sonar.host.url>http://localhost:9000</sonar.host.url>
-        <sonar.projectName>Skeleton Application</sonar.projectName>
-        <sonar.language>java</sonar.language>
-        <sonar.exclusions>**/*.xml</sonar.exclusions>
-        <sonar.coverage.jacoco.xmlReportPaths>../aggregate-report/target/site/jacoco-aggregate/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
         <sonar.moduleKey>${project.groupId}:${project.artifactId}</sonar.moduleKey>
-
-        <!--Replace projectKey and login with your projectKey and token-->
-        <sonar.projectKey>Skeleton-Application</sonar.projectKey>
-        <sonar.login>sqp_a59300ada8266d64456cdfeef697077de11399a1</sonar.login>
     </properties>
 
     <dependencies>
@@ -43,64 +34,6 @@
 
     <build>
         <plugins>
-<!--            &lt;!&ndash; Docker Maven Plugin &ndash;&gt;-->
-<!--            <plugin>-->
-<!--                <groupId>io.fabric8</groupId>-->
-<!--                <artifactId>docker-maven-plugin</artifactId>-->
-<!--                <version>0.34.1</version>-->
-<!--                <executions>-->
-<!--                    <execution>-->
-<!--                        <id>start-docker-containers</id>-->
-<!--                        <phase>pre-integration-test</phase>-->
-<!--                        <goals>-->
-<!--                            <goal>start</goal>-->
-<!--                        </goals>-->
-<!--                    </execution>-->
-<!--&lt;!&ndash;                    <execution>&ndash;&gt;-->
-<!--&lt;!&ndash;                        <id>stop-docker-containers</id>&ndash;&gt;-->
-<!--&lt;!&ndash;                        <phase>post-integration-test</phase>&ndash;&gt;-->
-<!--&lt;!&ndash;                        <goals>&ndash;&gt;-->
-<!--&lt;!&ndash;                            <goal>stop</goal>&ndash;&gt;-->
-<!--&lt;!&ndash;                        </goals>&ndash;&gt;-->
-<!--&lt;!&ndash;                    </execution>&ndash;&gt;-->
-<!--                </executions>-->
-<!--                <configuration>-->
-<!--                    <images>-->
-<!--                        <image>-->
-<!--                            <name>postgres:13</name>-->
-<!--                            <alias>postgres</alias>-->
-<!--                            <run>-->
-<!--                                <env>-->
-<!--                                    <POSTGRES_USER>sonar</POSTGRES_USER>-->
-<!--                                    <POSTGRES_PASSWORD>sonar</POSTGRES_PASSWORD>-->
-<!--                                    <POSTGRES_DB>sonar</POSTGRES_DB>-->
-<!--                                </env>-->
-<!--                                <ports>-->
-<!--                                    <port>5432:5432</port>-->
-<!--                                </ports>-->
-<!--                            </run>-->
-<!--                        </image>-->
-<!--                        <image>-->
-<!--                            <name>sonarqube:lts-community</name>-->
-<!--                            <alias>sonarqube</alias>-->
-<!--                            <run>-->
-<!--                                <env>-->
-<!--                                    <SONAR_JDBC_URL>jdbc:postgresql://postgres:5432/sonar</SONAR_JDBC_URL>-->
-<!--                                    <SONAR_JDBC_USERNAME>sonar</SONAR_JDBC_USERNAME>-->
-<!--                                    <SONAR_JDBC_PASSWORD>sonar</SONAR_JDBC_PASSWORD>-->
-<!--                                </env>-->
-<!--                                <ports>-->
-<!--                                    <port>9000:9000</port>-->
-<!--                                </ports>-->
-<!--                                <wait>-->
-<!--                                    <url>http://localhost:9000</url>-->
-<!--                                    <time>60000</time>-->
-<!--                                </wait>-->
-<!--                            </run>-->
-<!--                        </image>-->
-<!--                    </images>-->
-<!--                </configuration>-->
-<!--            </plugin>-->
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
@@ -133,6 +66,27 @@
                     </execution>
                 </executions>
             </plugin>
+
+            <!--Read sonar-project.properties file-->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>properties-maven-plugin</artifactId>
+                <version>1.0.0</version>
+                <executions>
+                    <execution>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>read-project-properties</goal>
+                        </goals>
+                        <configuration>
+                            <files>
+                                <file>${user.dir}\sonar-project.properties</file>
+                            </files>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
         </plugins>
     </build>
 
