@@ -30,6 +30,15 @@ This is a skeleton Java Spring boot multi-module application.
 6. Replace the project key and token in sonar-project.properties file.
 4. Run `mvn clean install`
 
+## Note:
+````
+If you don't want to set the project key and generate token in sonarqube. 
+
+Follow these 2 steps: 
+1. Uncomment sonar.login=admin and sonar.password=admin.
+2. Comment sonar.login=sqp_a59300ada8266d64456cdfeef697077de11399a1
+````
+
 To access generated sonar report go to http://localhost:9000
 
 Login into sonarqube using admin/admin default credentials
