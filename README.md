@@ -23,20 +23,15 @@ This is a skeleton Java Spring boot multi-module application.
 
 ## Steps to run the Project
 1. Clone the project using git clone
-2. Run the docker
-3. Run `docker compose up -d`
-4. Login into [sonarqube](http://localhost:9000) using default creds admin/admin.
-5. Create a new project on sonarqube and generate a token.
-6. Replace the project key and token in sonar-project.properties file.
-4. Run `mvn clean install`
+2. Run mvn clean install
 
 ## Note:
 ````
-If you don't want to set the project key and generate token in sonarqube. 
-
-Follow these 2 steps: 
-1. Uncomment sonar.login=admin and sonar.password=admin.
-2. Comment sonar.login=sqp_a59300ada8266d64456cdfeef697077de11399a1
+Before running mvn clean install make sure the docker is up.
+mvn clean install will spin up the required docker containers and publish the test-report to sonarqube.
+To keep your environment running set the property spring.docker.compose.lifecycle-management to start-only. 
+The default property start-and-stop stops the environment after finishing.
+All the sonar related configurations are in sonar-project.properties file.
 ````
 
 To access generated sonar report go to http://localhost:9000
