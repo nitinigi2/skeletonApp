@@ -39,3 +39,8 @@ To access generated sonar report go to http://localhost:9000
 Login into sonarqube using admin/admin default credentials
 
 ![img.png](img.png)
+
+Click to access [Swagger](http://localhost:8080/swagger-ui/index.html#/)
+
+Click to access [keycloack](http://localhost:8890/admin/master/console/).
+Login using admin/admin default credentials

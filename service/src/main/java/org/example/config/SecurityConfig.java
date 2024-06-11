@@ -19,10 +19,21 @@ public class SecurityConfig {
 
     private final JwtAuthConverter jwtAuthConverter;
 
+    private static final String[] AUTH_WHITE_LIST = {
+            "/v3/api-docs/**",
+            "/swagger-ui/**",
+            "/v2/api-docs/**",
+            "/swagger-ui.html",
+            "/api-docs",
+            "/api-docs/**",
+            "/swagger-resources/**"
+    };
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests((authz) ->
                 authz.requestMatchers(HttpMethod.GET, "/hello").permitAll()
+                        .requestMatchers(AUTH_WHITE_LIST).permitAll()
                         .requestMatchers(HttpMethod.GET, "/admin/**").hasRole(ADMIN_ROLE)
                         .requestMatchers(HttpMethod.GET, "/user/**").hasRole(USER_ROLE)
                         .requestMatchers(HttpMethod.GET, "/admin-and-user/**").hasAnyRole(ADMIN_ROLE, USER_ROLE)
