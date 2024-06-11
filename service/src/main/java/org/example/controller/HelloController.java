@@ -17,4 +17,14 @@ public class HelloController {
         String responseBody = helloService.getHelloWorldMessage();
         return ResponseEntity.ok().body(responseBody);
     }
+
+    @GetMapping("/admin")
+    public ResponseEntity<String> sayHelloToAdmin() {
+        return ResponseEntity.ok("Hello Admin");
+    }
+
+    @GetMapping("/user")
+    public ResponseEntity<String> sayHelloToUser() {
+        return ResponseEntity.ok("Hello User");
+    }
 }
