@@ -41,6 +41,7 @@ Login into sonarqube using admin/admin default credentials
 ![img.png](img.png)
 
 Click to access [Swagger](http://localhost:8080/swagger-ui/index.html#/)
+![img_1.png](img_1.png)
 
 # Setup keycloack for your application:
 
