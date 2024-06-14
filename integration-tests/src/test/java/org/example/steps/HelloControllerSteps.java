@@ -27,7 +27,6 @@ public class HelloControllerSteps {
     public void theHelloServiceIsRunning() throws InterruptedException {
         RestAssured.baseURI="http://localhost";
         RestAssured.port=port;
-        TimeUnit.SECONDS.sleep(5);
         // Setup steps if necessary
     }
 

@@ -13,7 +13,7 @@ public class HelloController {
     private HelloService helloService;
 
     @GetMapping(value = "/hello")
-    public ResponseEntity getHelloMessage() {
+    public ResponseEntity<String> getHelloMessage() {
         String responseBody = helloService.getHelloWorldMessage();
         return ResponseEntity.ok().body(responseBody);
     }
