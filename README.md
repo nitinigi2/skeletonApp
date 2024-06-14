@@ -42,5 +42,19 @@ Login into sonarqube using admin/admin default credentials
 
 Click to access [Swagger](http://localhost:8080/swagger-ui/index.html#/)
 
+# Setup keycloack for your application:
+
 Click to access [keycloack](http://localhost:8890/admin/master/console/).
-Login using admin/admin default credentials
+Steps:
+1. Login using admin/admin default credentials
+2. create a new realm with `MySuperApplicationRealm` name.
+3. Create a client with name `my-super-client`.
+4. In the Valid redirect URIs enter `http://localhost:8080/*`.
+5. Copy the client secret and save it somewhere. This secret will be used to authenticate our service app with keykloack.
+6. Create 2 users one with admin role and other with user role.
+7. Now run the application.
+8. Generate the token following [this](http://localhost:8890/realms/MySuperApplicationRealm) url and passing client token and client secret.
+9. Now you can access the admin and user by passing the client id, client secret and users username and password.
+
+
+

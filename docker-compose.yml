@@ -34,6 +34,8 @@ services:
       - "8890:8080"
     depends_on:
       - sonar_db
+#    volumes:
+#      - ./src/test/resources/realm-import.json:/opt/keycloak/data/import/realm-import.json
 
 volumes:
   sonar_db:
