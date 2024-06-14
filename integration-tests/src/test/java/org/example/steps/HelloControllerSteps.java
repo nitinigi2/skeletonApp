@@ -41,4 +41,30 @@ public class HelloControllerSteps {
         String actualResponse = response.getBody().asString();
         assertThat(actualResponse, equalTo(expectedResponse));
     }
+
+    @Given("the admin secret not added")
+    public void theAdminSecretNotAdded() {
+        // do nothing
+    }
+
+    @When("the client calls \\/admin")
+    public void theClientCallsAdmin() {
+        response = RestAssured.get("/admin");
+    }
+
+    @Then("the response code should be {int}")
+    public void theResponseCodeShouldBe(int arg0) {
+        int actualStatusCode = response.getStatusCode();
+        assertThat(actualStatusCode, equalTo(arg0));
+    }
+
+    @Given("the user secret not added")
+    public void theUserSecretNotAdded() {
+        // do nothing
+    }
+
+    @When("the client calls \\/user")
+    public void theClientCallsUser() {
+        response = RestAssured.get("/admin");
+    }
 }
