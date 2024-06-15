@@ -53,10 +53,9 @@ Steps:
 3. Create a client with name `my-super-client`.
 4. In the Valid redirect URIs enter `http://localhost:8080/*`.
 5. Copy the client secret and save it somewhere. This secret will be used to authenticate our service app with keykloack.
-6. Create 2 users one with admin role and other with user role.
 7. Now run the application.
 8. Generate the token following [this](http://localhost:8890/realms/MySuperApplicationRealm) url and passing client token and client secret.
-9. Now you can access the admin and user by passing the client id, client secret and users username and password.
+9. Now you can access the secured endpoint by passing the client id and client secret.
 
 
 
