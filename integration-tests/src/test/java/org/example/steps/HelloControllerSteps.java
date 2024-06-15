@@ -8,31 +8,33 @@ import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.server.LocalServerPort;
-
-import java.util.concurrent.TimeUnit;
+import org.springframework.http.HttpHeaders;
 
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @CucumberContextConfiguration
-public class HelloControllerSteps {
+public class HelloControllerSteps extends AbstractTestcontainers{
 
     @LocalServerPort
     private int port;
 
     private Response response;
 
+    private static final String PUBLIC_URL = "/public";
+    private static final String SECURED_URL = "/secured";
+
     @Given("the hello service is running")
-    public void theHelloServiceIsRunning() throws InterruptedException {
+    public void theHelloServiceIsRunning() {
         RestAssured.baseURI="http://localhost";
         RestAssured.port=port;
         // Setup steps if necessary
     }
 
-    @When("the client calls \\/hello")
-    public void theClientCallsHello() {
-        response = RestAssured.get("/hello");
+    @When("the client calls \\/public")
+    public void theClientCallsPublic() {
+        response = RestAssured.get(PUBLIC_URL);
     }
 
     @Then("the response should be {string}")
@@ -41,14 +43,14 @@ public class HelloControllerSteps {
         assertThat(actualResponse, equalTo(expectedResponse));
     }
 
-    @Given("the admin secret not added")
-    public void theAdminSecretNotAdded() {
+    @Given("secrets not passed")
+    public void secretsNotPassed() {
         // do nothing
     }
 
-    @When("the client calls \\/admin")
-    public void theClientCallsAdmin() {
-        response = RestAssured.get("/admin");
+    @When("the client calls \\/secured")
+    public void theClientCallsSecuredEndpoint() {
+        response = RestAssured.get(SECURED_URL);
     }
 
     @Then("the response code should be {int}")
@@ -57,13 +59,19 @@ public class HelloControllerSteps {
         assertThat(actualStatusCode, equalTo(arg0));
     }
 
-    @Given("the user secret not added")
-    public void theUserSecretNotAdded() {
-        // do nothing
+    @When("the client calls \\/secured for authenticated request")
+    public void theClientCallsSecuredForAuthenticatedRequest() {
+        String accessToken = keycloakSimpleApi.tokenManager().grantToken().getToken();
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer " + accessToken);
+        response = RestAssured.given().headers(headers).get(SECURED_URL);
     }
 
-    @When("the client calls \\/user")
-    public void theClientCallsUser() {
-        response = RestAssured.get("/admin");
+    @When("the client calls \\/secured for unauthenticated request with invalid token")
+    public void theClientCallsSecuredForUnauthenticatedRequestWithInvalidToken() {
+        HttpHeaders headers = new HttpHeaders();
+        headers.set("Authorization", "Bearer abcdef");
+        response = RestAssured.given().headers(headers).get(SECURED_URL);
     }
 }

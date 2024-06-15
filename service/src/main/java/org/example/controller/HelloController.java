@@ -12,19 +12,14 @@ public class HelloController {
     @Autowired
     private HelloService helloService;
 
-    @GetMapping(value = "/hello")
+    @GetMapping(value = "/public")
     public ResponseEntity<String> getHelloMessage() {
         String responseBody = helloService.getHelloWorldMessage();
         return ResponseEntity.ok().body(responseBody);
     }
 
-    @GetMapping("/admin")
+    @GetMapping("/secured")
     public ResponseEntity<String> sayHelloToAdmin() {
-        return ResponseEntity.ok("Hello Admin");
-    }
-
-    @GetMapping("/user")
-    public ResponseEntity<String> sayHelloToUser() {
-        return ResponseEntity.ok("Hello User");
+        return ResponseEntity.ok("Hello from secured endpoint");
     }
 }

@@ -32,10 +32,10 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.authorizeHttpRequests(authz ->
-                authz.requestMatchers(HttpMethod.GET, "/hello").permitAll()
+                authz.requestMatchers(HttpMethod.GET, "/public").permitAll()
                         .requestMatchers(AUTH_WHITE_LIST).permitAll()
-                        .requestMatchers(HttpMethod.GET, "/admin/**").hasRole(ADMIN_ROLE)
-                        .requestMatchers(HttpMethod.GET, "/user/**").hasRole(USER_ROLE)
+//                        .requestMatchers(HttpMethod.GET, "/admin/**").hasRole(ADMIN_ROLE)
+//                        .requestMatchers(HttpMethod.GET, "/user/**").hasRole(USER_ROLE)
                         .anyRequest().authenticated());
 
         http.sessionManagement(sess -> sess.sessionCreationPolicy(
